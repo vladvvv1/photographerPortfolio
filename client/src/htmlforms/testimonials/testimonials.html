@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lightbox Gallery</title>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            max-width: 1200px;
+        }
+        .gallery img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .lightbox img {
+            max-width: 80%;
+            max-height: 80%;
+            transition: transform 0.3s;
+        }
+        .close, .prev, .next {
+            position: absolute;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            user-select: none;
+        }
+        .close {
+            top: 10px;
+            right: 20px;
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img src="../../photos/AV9A4108-7c226870-2500.jpg" onclick="openLightbox(0)">
+        <img src="../../photos/backgroundpicture.png" onclick="openLightbox(1)">
+        <img src="../../photos/IMG_1740-57aa7711-2500.jpeg" onclick="openLightbox(2)">
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <span class="close" onclick="closeLightbox()">&times;</span>
+        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
+        <img id="lightbox-img" onclick="zoomImage()">
+        <span class="next" onclick="changeImage(1)">&#10095;</span>
+    </div>
+
+    <script>
+        let images = document.querySelectorAll('.gallery img');
+        let lightbox = document.getElementById('lightbox');
+        let lightboxImg = document.getElementById('lightbox-img');
+        let currentIndex = 0;
+        let zoomed = false;
+
+        function openLightbox(index) {
+            currentIndex = index;
+            lightboxImg.src = images[index].src;
+            lightbox.style.display = 'flex';
+        }
+
+        function closeLightbox() {
+            lightbox.style.display = 'none';
+            zoomed = false;
+            lightboxImg.style.transform = 'scale(1)';
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            if (currentIndex < 0) currentIndex = images.length - 1;
+            if (currentIndex >= images.length) currentIndex = 0;
+            lightboxImg.src = images[currentIndex].src;
+            zoomed = false;
+            lightboxImg.style.transform = 'scale(1)';
+        }
+
+        function zoomImage() {
+            zoomed = !zoomed;
+            lightboxImg.style.transform = zoomed ? 'scale(1.5)' : 'scale(1)';
+        }
+    </script>
+</body>
+</html>

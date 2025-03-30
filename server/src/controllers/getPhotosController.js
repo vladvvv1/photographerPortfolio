@@ -1,31 +1,48 @@
+
+
 import { supabase } from "../config/supabaseClient.js";
 
 const getPhoto = async (req, res) => {
     try {
-        const { category } = req.body;
+        let { category } = req.body;
+
+        console.log("req.body: ", req.body)
+        console.log("category: ", category);
+
+        if (!Array.isArray(category)) {
+            category = [category];
+        }
 
         const { data: categoryData, error: categoryError } = await supabase
             .from("categories")
             .select("id")
-            .eq("name", category)
-            .single();
+            .in("name", category);
 
-        console.log("Category id:", categoryData.id);
-
-        if (categoryError)
+        if (categoryError) {
+            console.log(categoryError);
             return res.status(404).json({ error: "Category not found." });
+        }
+
+        const category_id = categoryData.map(item => item.id);
+
+        // If no categories are found, return an error
+        if (category_id.length === 0) {
+            return res.status(404).json({ error: "No matching categories found." });
+        }
+
+        console.log("category_id: ", category_id);
 
         const { data: photoId, error: relationError } = await supabase
             .from("photo_categories")
             .select("photo_id")
-            .eq("category_id", categoryData.id);
+            .in("category_id", category_id);
 
         if (relationError) throw relationError;
 
-        console.log("Photo id: ", photoId);
+        console.log("photoId: ", photoId);
 
         const photoIdList = photoId.map((p) => p.photo_id);
-        console.log(photoIdList);
+        console.log("photoIdList: ", photoIdList);
 
         const { data: photos, error: photosError } = await supabase
             .from("photos")

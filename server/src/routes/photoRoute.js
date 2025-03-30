@@ -7,8 +7,9 @@ import deletePhoto from "../controllers/deleteController.js";
 const router = express.Router();
 const upload = multer({ storage: multer.memoryStorage() });
 
-router.get("/getPhotos", getPhotos);
-router.post("/uploadPhoto", upload.single("photo"), uploadPhoto);
+router.post("/getPhotos", getPhotos);
+
+router.post("/uploadPhoto", upload.array("photos"), uploadPhoto);
 router.delete("/deletePhoto", deletePhoto);
 
 export default router;
