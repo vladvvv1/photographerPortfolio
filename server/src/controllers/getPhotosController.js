@@ -1,5 +1,3 @@
-
-
 import { supabase } from "../config/supabaseClient.js";
 
 const getPhoto = async (req, res) => {
@@ -25,7 +23,7 @@ const getPhoto = async (req, res) => {
 
         const category_id = categoryData.map(item => item.id);
 
-        // If no categories are found, return an error
+        
         if (category_id.length === 0) {
             return res.status(404).json({ error: "No matching categories found." });
         }
