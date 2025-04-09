@@ -1,148 +1,42 @@
-<!-- <!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Відображення Фото</title>
-    <style>
-        .photo-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        .photo-item {
-            width: 300px;
-            height: 300px;
-            background-color: #f0f0f0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .photo-item img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: cover;
-        }
-        .upload-container {
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-    </style>
-</head>
-<body>
-    <h1>Фотографії</h1>
-    <div class="photo-container" id="photo-container">
-        
-    </div>
-
-    <div class="upload-container">
-        <input type="file" id="fileInput" />
-        <button onclick="uploadPhoto()">Завантажити Фото</button>
-    </div>
-
-    <script>
-        async function fetchPhotos() {
-            try {
-                const response = await fetch('http://localhost:3000/photos/getPhotos', {
-                    method: 'POST',  // Змінив на POST
-                    body: JSON.stringify({
-                        category: ["About"] // Виправив на масив
-                    }),
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                });
-
-                if (!response.ok) {
-                    throw new Error('Помилка при завантаженні фото');
-                }
-
-                const photos = await response.json();
-                const container = document.getElementById('photo-container');
-
-                // Очищаємо контейнер перед додаванням нових фото
-                container.innerHTML = '';
-
-                // Додаємо кожне фото до контейнера
-                photos.forEach(photo => {
-                    const photoItem = document.createElement('div');
-                    photoItem.classList.add('photo-item');
-
-                    const img = document.createElement('img');
-                    img.src = photo.url; // Заміни на правильну URL-адресу фото, яку повертає твій API
-                    img.alt = 'Фото';
-
-                    photoItem.appendChild(img);
-                    container.appendChild(photoItem);
-                });
-            } catch (error) {
-                console.error('Помилка:', error);
-            }
-        }
-
-        async function uploadPhoto() {
-            const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-
-            if (!file) {
-                alert('Будь ласка, виберіть фото для завантаження.');
-                return;
-            }
-
-            const formData = new FormData();
-            formData.append('photo', file);
-
-            try {
-                const response = await fetch('http://localhost:3000/photos/upload', {
-                    method: 'POST',
-                    body: formData,
-                });
-
-                if (!response.ok) {
-                    throw new Error('Помилка при завантаженні фото');
-                }
-
-                // Якщо все успішно, перезавантажуємо список фотографій
-                alert('Фото успішно завантажено!');
-                fetchPhotos();
-                        } catch (error) {
-                console.error('Помилка:', error);
-            }
-        }
-
-        fetchPhotos();
-    </script>
-</body>
-</html> -->
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Адмін-панель фото</title>
-    <style>
-        body { font-family: Arial, sans-serif; padding: 20px; }
-        .category-list { display: flex; gap: 10px; margin-bottom: 20px; }
-        .category-list a { padding: 10px; background: #007bff; color: white; text-decoration: none; border-radius: 5px; }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <h1>ADMINKA ДЛЯ НАСТЮХИИ</h1>
-    <div class="category-list">
-        <a href="about.html">About</a>
-        <a href="testimonials.html">Testimonials</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="couples.html">Couples</a>
-        <a href="weddings.html">Weddings</a>
-        <a href="individual.html">Individual</a>
-        <a href="family.html">Family</a>
-        <a href="pregnancy.html">Pregnancy</a>
-        <a href="foods.html">Foods</a>
-        <a href="baptism.html">Baptism</a>        
-    </div>
+
+    <label for="category-select" class="category-selector">Вибери сторінку -></label>
+    <select name="category" id="category-select">
+        <option value="">--Please choose an option--</option>
+        <option value="About">about</option>
+        <option value="Testimonials">testimonials</option>
+        <option value="Portfolio">portfolio</option>
+        <option value="Couples">couples</option>
+        <option value="Weddings">weddings</option>
+        <option value="Individual">individual</option>
+        <option value="Family">family</option>
+        <option value="Pregnancy">pregnancy</option>
+        <option value="Foods">foods</option>
+        <option value="Baptism/christening">baptism</option>
+    </select>
+    
+    <div class="upload-container">
+        <label for="fileInput" class="custom-file-upload">Вибрати фото</label>
+        <input type="file" id="fileInput" multiple />
+        <p id="file-count">Вибрано файлів: 0</p>
+        <button id="upload-btn">Завантажити Фото</button>
+
+        <h4 class="warning-message">It may take a few seconds...</h1>
+    </div>    
+
+    <div class="photo-container" id="photo-container"></div>
+
+    
+    <div id="photos-container"></div>
+    <script src="script.js"></script>
 </body>
 </html>

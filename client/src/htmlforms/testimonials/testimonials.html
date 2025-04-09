@@ -1,116 +1,109 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lightbox Gallery</title>
-    <style>
-       body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 15px;
-            max-width: 1200px;
-        }
-        .gallery img {
-            width: 100%;
-            height: 250px;
-            object-fit: cover;
-            cursor: pointer;
-            border-radius: 10px;
-            transition: transform 0.3s;
-        }
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-        }
-        .lightbox img {
-            max-width: 80%;
-            max-height: 80%;
-            transition: transform 0.3s;
-        }
-        .close, .prev, .next {
-            position: absolute;
-            color: white;
-            font-size: 2rem;
-            cursor: pointer;
-            user-select: none;
-        }
-        .close {
-            top: 10px;
-            right: 20px;
-        }
-        .prev {
-            left: 20px;
-        }
-        .next {
-            right: 20px;
-        }
-    </style>
-</head>
-<body>
-    <div class="gallery">
-        <img src="../../photos/AV9A4108-7c226870-2500.jpg" onclick="openLightbox(0)">
-        <img src="../../photos/backgroundpicture.png" onclick="openLightbox(1)">
-        <img src="../../photos/IMG_1740-57aa7711-2500.jpeg" onclick="openLightbox(2)">
-    </div>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Testimonials - whengreen.phts</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="icon" type="image/x-icon" href="../../photos/icon1.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="../about/fslightbox.js"></script>
+    </head>
 
-    <div class="lightbox" id="lightbox">
-        <span class="close" onclick="closeLightbox()">&times;</span>
-        <span class="prev" onclick="changeImage(-1)">&#10094;</span>
-        <img id="lightbox-img" onclick="zoomImage()">
-        <span class="next" onclick="changeImage(1)">&#10095;</span>
-    </div>
+    <body>
+        <div class="welcome">
+            <div class="container">
+                <div class="first-page">
+                    <div class="header">
+                        <div class="header-menu">
+                            <a class="header-title">WHENGREEN.PHTS</a>
 
-    <script>
-        let images = document.querySelectorAll('.gallery img');
-        let lightbox = document.getElementById('lightbox');
-        let lightboxImg = document.getElementById('lightbox-img');
-        let currentIndex = 0;
-        let zoomed = false;
+                            <ul class="nav-links">
+                                <li><a class="node" href="../home/index.html">HOME</a></li>
+                                <li><a class="node" href="../about/about.html">ABOUT</a></li>
+                                <li><a class="node" href="../testimonials/testimonials.html">TENSIMONIALS</a></li>
+                                <li>
+                                    <a class="node" href="#portfolio">PORTFOLIO ↓</a>
+                                    <button class="toggle">toggle</button>
+                                    <ul class="dropdown2">
+                                        <li><a class="node"  href="#Couples">Couples</a></li>
+                                        <li><a class="node" href="#Weddings">Weddings</a></li>
+                                        <li><a class="node"  href="#Individual">Individual</a></li>
+                                        <li><a class="node" href="#Family">Family</a></li>
+                                        <li><a class="node"  href="#Pregnancy">Pregnancy</a></li>
+                                        <li><a class="node" href="#Foods">Foods</a></li>
+                                        <li><a class="node" href="#Baptism">Baptism / Christening</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="node" href="../contact/contact.html">CONTACT</a></li>
+                            </ul>
 
-        function openLightbox(index) {
-            currentIndex = index;
-            lightboxImg.src = images[index].src;
-            lightbox.style.display = 'flex';
-        }
+                            <div class="burger-menu">
+                                <span></span>
+                            </div>
 
-        function closeLightbox() {
-            lightbox.style.display = 'none';
-            zoomed = false;
-            lightboxImg.style.transform = 'scale(1)';
-        }
+                        </div>
+                    </div>
+            
+            
+                    <div class="page-with-welcome-text">
+                        <div class="container2">
+                            <div class="content-wrapper2">
+                                <p class="left-text">Love Notes from People I’ve Photographed</p>
+                            </div>
+                            <div class="image2-block">
+                                <img class="image2" src="../../photos/AV9A3768-2-b5d7a908-1500.jpg">
+                            </div>
+                            
+                            <div class="text-wrapper2">
+                                <div class="right-text">
+                                    <p>love. memories. adventures. forever.</p>
+                                </div> 
+                            </div>
+                     </div>
+                </div>
 
-        function changeImage(direction) {
-            currentIndex += direction;
-            if (currentIndex < 0) currentIndex = images.length - 1;
-            if (currentIndex >= images.length) currentIndex = 0;
-            lightboxImg.src = images[currentIndex].src;
-            zoomed = false;
-            lightboxImg.style.transform = 'scale(1)';
-        }
+                <div id="photo-displaying-page"></div>
 
-        function zoomImage() {
-            zoomed = !zoomed;
-            lightboxImg.style.transform = zoomed ? 'scale(1.5)' : 'scale(1)';
-        }
-    </script>
-</body>
+            <footer>
+                <div class="footer-left">
+                    <p>&copy; 2025 whengreen.phts</p>
+                </div>
+                <div class="footer-center">
+                    <div class="footer-icon">
+                        <a href="https://www.facebook.com/profile.php?id=100011780673668" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Facebook%2BIcon%2BBlack.png" alt="Facebook">
+                        </a>
+                    </div>
+                    
+                    <div class="footer-icon">
+                        <a href="https://www.instagram.com/whengreen.phts/" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Instagram_font_awesome.svg" alt="Instagram">
+                        </a>
+                    </div>
+                    
+                    <div class="footer-icon">
+                        <a href="https://www.tiktok.com/@whengreen.phts?_t=8raJb3KpsTv&_r=1" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Tiktok_icon.svg" alt="Tiktok">
+                        </a>
+                    </div>
+                </div>
+            </footer>
+            <div class="footer-right">
+                <button id="scrollToTopBtn">↑</button>
+            </div>
+        </div>
+
+        <!-- GLightbox JS -->
+        <script src="fslightbox.js"></script>
+        
+        <script src="./script.js"></script>
+    </body>
 </html>

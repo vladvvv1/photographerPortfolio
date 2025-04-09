@@ -30,6 +30,4 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     toggleDropdownBtn.addEventListener("click", toggleDropdown); 
-    // handleResize();
-    // window.addEventListener('resize', handleResize)
 });

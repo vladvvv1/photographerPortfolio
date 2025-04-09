@@ -1,0 +1,256 @@
+
+body {
+    font-family: "Work Sans", sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+h1 {
+    text-align: center;
+    font-weight: 400;
+    font-size: 28px;
+    color: #222;
+    font-family: "Work Sans", sans-serif;
+}
+
+.category-list {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.category-list a {
+    padding: 10px 15px;
+    background: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: background 0.3s ease-in-out;
+}
+
+.category-list a:hover {
+    background: #0056b3;
+}
+
+#photos-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 30px;
+}
+
+#photos-container img {
+    max-width: 100%;
+    height: 300px;
+    border-radius: 10px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    margin: 10px;
+}
+
+#photos-container img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+#fileInput {
+    display: none; /* Ховаємо стандартний input */
+}
+
+.custom-file-upload {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: inline-block;
+}
+
+.custom-file-upload:hover {
+    background: linear-gradient(135deg, #5a0fb6, #1e63e8);
+    transform: scale(1.05);
+}
+
+.custom-file-upload:active {
+    transform: scale(0.98);
+}
+
+.category-selector {
+    background: linear-gradient(135deg, #5b5066, #0b1629);
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: 300;
+}
+
+/* Style for the category select dropdown */
+label[for="category-select"] {
+    font-size: 16px;
+    margin-right: 10px;
+    color: white;
+    
+}
+
+/* Style for the select dropdown */
+#category-select {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    width: 220px; /* Adjust width as necessary */
+    margin-top: 10px;
+    transition: all 0.3s ease; /* Smooth transition effect */
+}
+
+/* Style for the select dropdown when focused */
+#category-select:focus {
+    border-color: #4CAF50; /* Change border color on focus */
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5); /* Green glow effect */
+}
+
+/* Style for options in the select dropdown */
+#category-select option {
+    padding: 10px;
+    font-size: 16px;
+    color: #333;
+    background-color: #fff;
+}
+
+/* Style for option when hovered */
+#category-select option:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style for default option */
+#category-select option:first-child {
+    color: #999;
+}
+
+
+#upload-btn {
+    margin-top: 10px;
+    background: linear-gradient(135deg, #411c2b, #32171b);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+#upload-btn:hover {
+    background: linear-gradient(135deg, #5a2635, #472024);
+    transform: scale(1.05);
+}
+
+#upload-btn:active {
+    transform: scale(0.98);
+}
+
+.photo-item {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.delete-btn:hover {
+    opacity: 1;
+}
+
+#file-count {
+    margin-top: 0;
+    font-weight: 200;
+    font-size: 14px;
+    color: black;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(0, 0, 0, 0.6); /* Темний напівпрозорий фон */
+    color: white;
+    border: none;
+    padding: 8px;
+    font-size: 18px;
+    border-radius: 50%; /* Кругла форма */
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s;
+    opacity: 0.8;
+}
+
+.delete-btn:hover {
+    background-color: rgba(230, 57, 70, 0.9); /* Яскраво-червоний при наведенні */
+    transform: scale(1.1); /* Легке збільшення */
+    opacity: 1;
+}
+
+
+.delete-btn:active {
+    transform: scale(0.95);
+}
+
+.delete-btn::before {
+    /* content: "✖"; Іконка хрестика */
+    font-size: 18px;
+    line-height: 18px;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+#fileInput {
+    display: none;
+}

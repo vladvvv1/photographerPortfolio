@@ -1,40 +1,107 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photographer Portfolio - Info</title>
-    <link rel="stylesheet" href="./style.css">
-</head>
-<body>
-    <header>
-        <h1>Photography Portfolio</h1>
-    </header>
-    
-    <section class="gallery" id="gallery">
-        <!-- Images will be loaded here dynamically -->
-    </section>a
-    
-    <script>
-        async function fetchImages() {
-            try {
-                const response = await fetch(`/api/photos?category=info`);
-                const data = await response.json();
-                const gallery = document.getElementById('gallery');
-                gallery.innerHTML = '';
-                
-                data.forEach(photo => {
-                    const img = document.createElement('img');
-                    img.src = photo.url;
-                    img.alt = photo.title || 'Photo';
-                    gallery.appendChild(img);
-                });
-            } catch (error) {
-                console.error('Error fetching images:', error);
-            }
-        }
-        
-        document.addEventListener("DOMContentLoaded", fetchImages);
-    </script>
-</body>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>About - whengreen.phts</title>
+        <link rel="stylesheet" href="./style.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="icon" type="image/x-icon" href="../../photos/icon1.png">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="fslightbox.js"></script>
+    </head>
+
+    <body>
+        <div class="welcome">
+            <div class="container">
+                <div class="first-page">
+                    <div class="header">
+                        <div class="header-menu">
+                            <a class="header-title">WHENGREEN.PHTS</a>
+
+                            <ul class="nav-links">
+                                <li><a class="node" href="../home/index.html">HOME</a></li>
+                                <li><a class="node" href="../about/about.html">ABOUT</a></li>
+                                <li><a class="node" href="../testimonials/testimonials.html">TENSIMONIALS</a></li>
+                                <li>
+                                    <a class="node" href="#portfolio">PORTFOLIO ↓</a>
+                                    <button class="toggle">toggle</button>
+                                    <ul class="dropdown2">
+                                        <li><a class="node"  href="#Couples">Couples</a></li>
+                                        <li><a class="node" href="#Weddings">Weddings</a></li>
+                                        <li><a class="node"  href="#Individual">Individual</a></li>
+                                        <li><a class="node" href="#Family">Family</a></li>
+                                        <li><a class="node"  href="#Pregnancy">Pregnancy</a></li>
+                                        <li><a class="node" href="#Foods">Foods</a></li>
+                                        <li><a class="node" href="#Baptism">Baptism / Christening</a></li>
+                                    </ul>
+                                </li>
+                                <li><a class="node" href="../contact/contact.html">CONTACT</a></li>
+                            </ul>
+
+                            <div class="burger-menu">
+                                <span></span>
+                            </div>
+
+                        </div>
+                    </div>
+            
+                    <section class="hero-section">
+                        <div class="hero-content">
+                            <h1>Let's Begin Your Adventure</h1>
+                            <p>You're One Step Closer To Your Dream</p>
+                            <span>Elopement, Just Fill Out This Quick Form</span>
+                        </div>
+                    </section>
+            
+                    <div class="page-with-welcome-text">
+                <div class="container2">
+                    <div class="content-wrapper2">
+                        <p class="content-left2">Before you share your story...</p>
+                    </div>
+                    <img class="image2" src="../../photos/IMG_1740-57aa7711-2500.jpeg">
+                    <div class="text-wrapper2">
+                        <p class="right-up-text2">LET ME TELL YOU MINE...</p>
+                        <p class="rigth-text2">Hi! My name is Nastasia, I am a photographer from Ukraine, and now I live and work in Chicago. I am 27 years old, and I have a lot of experience in photography, admiring every type of shooting. From wedding moments to interior shots, from individual portraits to photos of food - I work in different genres to convey the beauty and emotions in every detail.
+                        I am interested in working in different genres because each brings new challenges and opportunities.</p> 
+                    </div> 
+                </div>
+            </div>
+
+            <footer>
+                <div class="footer-left">
+                    <p>&copy; 2025 whengreen.phts</p>
+                </div>
+                <div class="footer-center">
+                    <div class="footer-icon">
+                        <a href="https://www.facebook.com/profile.php?id=100011780673668" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/0/0c/Facebook%2BIcon%2BBlack.png" alt="Facebook">
+                        </a>
+                    </div>
+                    
+                    <div class="footer-icon">
+                        <a href="https://www.instagram.com/whengreen.phts/" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6e/Instagram_font_awesome.svg" alt="Instagram">
+                        </a>
+                    </div>
+                    
+                    <div class="footer-icon">
+                        <a href="https://www.tiktok.com/@whengreen.phts?_t=8raJb3KpsTv&_r=1" target="_blank">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Tiktok_icon.svg" alt="Tiktok">
+                        </a>
+                    </div>
+                </div>
+            </footer>
+            <div class="footer-right">
+                <button id="scrollToTopBtn">↑</button>
+            </div>
+        </div>
+        <script src="fslightbox.js"></script>
+        <script src="./script.js"></script>
+    </body>
 </html>

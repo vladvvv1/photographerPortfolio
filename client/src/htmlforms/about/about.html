@@ -4,7 +4,9 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>About - whengreen.phts</title>
+        <link rel="stylesheet" href="../css-header-style/header.css" />
         <link rel="stylesheet" href="./style.css" />
+        
         <link
             href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600&display=swap"
             rel="stylesheet"
@@ -13,6 +15,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <script src="fslightbox.js"></script>
     </head>
 
     <body>
@@ -26,11 +29,9 @@
                             <ul class="nav-links">
                                 <li><a class="node" href="../home/index.html">HOME</a></li>
                                 <li><a class="node" href="../about/about.html">ABOUT</a></li>
+                                <li><a class="node" href="../testimonials/testimonials.html">TENSIMONIALS</a></li>
                                 <li>
-                                    <a class="node" href="../testimonials/testimonials.html">TENSIMONIALS</a> 
-                                </li>
-                                <li>
-                                    <a class="node" href="#portfolio">PORTFOLIO ↓</a>
+                                    <a class="node toggle-node" href="#portfolio">PORTFOLIO ↓</a>
                                     <button class="toggle">toggle</button>
                                     <ul class="dropdown2">
                                         <li><a class="node"  href="#Couples">Couples</a></li>
@@ -42,15 +43,18 @@
                                         <li><a class="node" href="#Baptism">Baptism / Christening</a></li>
                                     </ul>
                                 </li>
-                                <li><a class="node" href="#contact">CONTACT</a></li>
+                                <li><a class="node" href="../contact/contact.html">CONTACT</a></li>
                             </ul>
 
                             <div class="burger-menu">
                                 <span></span>
                             </div>
+
                         </div>
                     </div>
-            <div class="page-with-welcome-text">
+            
+            
+                    <div class="page-with-welcome-text">
                 <div class="container2">
                     <div class="content-wrapper2">
                         <p class="content-left2">Before you share your story...</p>
@@ -58,13 +62,14 @@
                     <img class="image2" src="../../photos/IMG_1740-57aa7711-2500.jpeg">
                     <div class="text-wrapper2">
                         <p class="right-up-text2">LET ME TELL YOU MINE...</p>
-                        <p class="rigth-text2">Hi! My name is Nastasia, I am a photographer from Ukraine, and now I live and work in Chicago. I am 27 years old, and I have a lot of experience in photography, admiring every type of shooting. From wedding moments to interior shots, from individual portraits to photos of food - I work in different genres to convey the beauty and emotions in every detail.<br> I am interested in working in different genres because each brings new challenges and opportunities.</p> 
+                        <p class="rigth-text2">Hi! My name is Nastasia, I am a photographer from Ukraine, and now I live and work in Chicago. I am 27 years old, and I have a lot of experience in photography, admiring every type of shooting. From wedding moments to interior shots, from individual portraits to photos of food - I work in different genres to convey the beauty and emotions in every detail.
+                        I am interested in working in different genres because each brings new challenges and opportunities.</p> 
                     </div> 
                 </div>
             </div>
 
-            <div class="photo-displaying-page"></div>
-            
+            <div id="photo-displaying-page"></div>
+
             <footer>
                 <div class="footer-left">
                     <p>&copy; 2025 whengreen.phts</p>
@@ -93,7 +98,10 @@
                 <button id="scrollToTopBtn">↑</button>
             </div>
         </div>
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+        <script src="fslightbox.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../../utils/scroll.js"></script>
+        <script src="../../utils/burgerMenu.js"></script>
         <script src="./script.js"></script>
     </body>
 </html>
