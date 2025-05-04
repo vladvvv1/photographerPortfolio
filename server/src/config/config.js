@@ -8,3 +8,4 @@ export const GMAIL_EMAIL = process.env.GMAIL_EMAIL;
 export const GMAIL_PASSWORD = process.env.GMAIL_PASSWORD;
 export const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 export const CHAT_ID = process.env.CHAT_ID;
+export const COULDFARE_SECRET_KEY = process.env.COULDFARE_SECRET_KEY;

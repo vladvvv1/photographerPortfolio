@@ -4,16 +4,18 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>About - whengreen.phts</title>
+        
+        <link rel="stylesheet" href="../css-header-style/header.css" />
         <link rel="stylesheet" href="./style.css" />
-        <link
-            href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600&display=swap"
-            rel="stylesheet"
-        />
+        <link rel="stylesheet" href="../css-header-style/footer.css" />
+
         <link rel="icon" type="image/x-icon" href="../../photos/icon1.png">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <script src="fslightbox.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital,wght@0,400;0,700;1,400;1,700&family=Vollkorn:ital,wght@0,400..900;1,400..900&family=Winky+Sans:ital,wght@0,300..900;1,300..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <!-- <script src="https://www.google.com/recaptcha/api.js" async defer></script> -->
+
+
+
     </head>
 
     <body>
@@ -29,16 +31,16 @@
                                 <li><a class="node" href="../about/about.html">ABOUT</a></li>
                                 <li><a class="node" href="../testimonials/testimonials.html">TENSIMONIALS</a></li>
                                 <li>
-                                    <a class="node" href="#portfolio">PORTFOLIO ↓</a>
-                                    <button class="toggle">toggle</button>
+                                    <a class="node toggle-node" href="#portfolio">PORTFOLIO ↓</a>
+                                    <button class="toggle" onclick="this.classList.toggle('active')"></button>
                                     <ul class="dropdown2">
-                                        <li><a class="node"  href="#Couples">Couples</a></li>
-                                        <li><a class="node" href="#Weddings">Weddings</a></li>
-                                        <li><a class="node"  href="#Individual">Individual</a></li>
-                                        <li><a class="node" href="#Family">Family</a></li>
-                                        <li><a class="node"  href="#Pregnancy">Pregnancy</a></li>
-                                        <li><a class="node" href="#Foods">Foods</a></li>
-                                        <li><a class="node" href="#Baptism">Baptism / Christening</a></li>
+                                        <li><a class="node"  href="../portfolio/couples/couples.html">Couples</a></li>
+                                        <li><a class="node" href="../portfolio/weddings/weddings.html">Weddings</a></li>
+                                        <li><a class="node"  href="../portfolio/individual/individual.html">Individual</a></li>
+                                        <li><a class="node" href="../portfolio/family/family.html">Family</a></li>
+                                        <li><a class="node"  href="../portfolio/pregnancy/pregnancy.html">Pregnancy</a></li>
+                                        <li><a class="node" href="../portfolio/foods/foods.html">Foods</a></li>
+                                        <li><a class="node" href="../portfolio/christening/christening.html">Baptism / Christening</a></li>
                                     </ul>
                                 </li>
                                 <li><a class="node" href="../contact/contact.html">CONTACT</a></li>
@@ -52,27 +54,33 @@
                     </div>
             
                     <section class="hero-section">
-                        <div class="hero-content">
-                            <h1>Let's Begin Your Adventure</h1>
+                        <div class="hero-text-top">
+                          <h1>Let's Begin Your Adventure</h1>
+                        </div>
+                        <div class="hero-text-bottom">
                             <p>You're One Step Closer To Your Dream</p>
                             <span>Elopement, Just Fill Out This Quick Form</span>
                         </div>
                     </section>
-            
-                    <div class="page-with-welcome-text">
-                <div class="container2">
-                    <div class="content-wrapper2">
-                        <p class="content-left2">Before you share your story...</p>
-                    </div>
-                    <img class="image2" src="../../photos/IMG_1740-57aa7711-2500.jpeg">
-                    <div class="text-wrapper2">
-                        <p class="right-up-text2">LET ME TELL YOU MINE...</p>
-                        <p class="rigth-text2">Hi! My name is Nastasia, I am a photographer from Ukraine, and now I live and work in Chicago. I am 27 years old, and I have a lot of experience in photography, admiring every type of shooting. From wedding moments to interior shots, from individual portraits to photos of food - I work in different genres to convey the beauty and emotions in every detail.
-                        I am interested in working in different genres because each brings new challenges and opportunities.</p> 
-                    </div> 
-                </div>
-            </div>
+                    
+                        <div class="contactExternalForm">
+                            <form id="contactForm">
+                                <label for="name">Name *</label><br>
+                                <input type="text" id="name" name="name" required autocomplete="off" autocorrect="off"> <br><br>
+                        
+                                <label for="email">Email address*</label><br>
+                                <input type="email" id="email" name="email" required><br><br>
 
+                                <label for="message">Message *</label><br>
+                                <textarea id="message" name="message" rows="3" required></textarea><br><br>
+
+                                <button type="submit">Send Message</button>
+                            </form>
+
+                            <div id="result"></div>
+                        </div>
+
+                
             <footer>
                 <div class="footer-left">
                     <p>&copy; 2025 whengreen.phts</p>
@@ -101,7 +109,9 @@
                 <button id="scrollToTopBtn">↑</button>
             </div>
         </div>
-        <script src="fslightbox.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="../../utils/scroll.js"></script>
+        <script src="../..//utils/burgerMenu.js"></script>
         <script src="./script.js"></script>
     </body>
 </html>

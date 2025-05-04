@@ -6,6 +6,7 @@
         <title>whengreen.phts</title>
         <link rel="stylesheet" href="../css-header-style/header.css"/>
         <link rel="stylesheet" href="./styles.css" />
+        <link rel="stylesheet" href="../css-header-style/footer.css" />
         <link
             href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@400;600&display=swap"
             rel="stylesheet"
@@ -32,15 +33,15 @@
                                 </li>
                                 <li>
                                     <a class="node toggle-node" href="#portfolio">PORTFOLIO ↓</a>
-                                    <button class="toggle">toggle</button>
+                                    <button class="toggle" onclick="this.classList.toggle('active')"></button>
                                     <ul class="dropdown2">
-                                        <li><a class="node"  href="#Couples">Couples</a></li>
-                                        <li><a class="node" href="#Weddings">Weddings</a></li>
-                                        <li><a class="node"  href="#Individual">Individual</a></li>
-                                        <li><a class="node" href="#Family">Family</a></li>
-                                        <li><a class="node"  href="#Pregnancy">Pregnancy</a></li>
-                                        <li><a class="node" href="#Foods">Foods</a></li>
-                                        <li><a class="node" href="#Baptism">Baptism / Christening</a></li>
+                                        <li><a class="node"  href="../portfolio/couples/couples.html">Couples</a></li>
+                                        <li><a class="node" href="../portfolio/weddings/weddings.html">Weddings</a></li>
+                                        <li><a class="node"  href="../portfolio/individual/individual.html">Individual</a></li>
+                                        <li><a class="node" href="../portfolio/family/family.html">Family</a></li>
+                                        <li><a class="node"  href="../portfolio/pregnancy/pregnancy.html">Pregnancy</a></li>
+                                        <li><a class="node" href="../portfolio/foods/foods.html">Foods</a></li>
+                                        <li><a class="node" href="../portfolio/christening/christening.html">Baptism / Christening</a></li>
                                     </ul>
                                 </li>
                                 <li><a class="node" href="../contact/contact.html">CONTACT</a></li>
@@ -72,16 +73,19 @@
             </div>
             <div class="page-with-welcome-text">
                 <div class="container2">
-                    <div class="content-wrapper2">
+                    <div class="box-text-button">
                         <p class="content-left2">Welcome friend, my name is Nastasiia</p>
-                        <a href="../about/about.html"  class="more-about-button">MORE ABOUT ME</a>
+                        
                     </div>
                     <img class="image2" src="../../photos/DSCF7072-f5f9045c-2500.jpg">
+                    
                     <div class="text-wrapper2">
                         <p class="rigth-text2">I am a photographer based in Chicago, originally from Ukraine. I have been passionate about photography for over three years, capturing the beauty of everyday life through my lens. My work covers a wide range of subjects, from individual and couple portraits to family sessions, weddings, and even special moments like birthdays and maternity shoots. I also enjoy capturing the fine details in product photography, allowing each subject to tell its own unique story.</p> 
-                    </div> 
+                    </div>
                 </div>
+                <a href="../about/about.html"   class="more-about-button">MORE ABOUT ME</a>
             </div>
+            
             <footer>
                 <div class="footer-left">
                     <p>&copy; 2025 whengreen.phts</p>

@@ -1,10 +1,48 @@
 import { supabase } from "../config/supabaseClient.js";
 import { transporter } from "../config/nodemailer.js";
-import { GMAIL_EMAIL, TELEGRAM_BOT_TOKEN, CHAT_ID } from "../config/config.js";
+import {COULDFARE_SECRET_KEY, GMAIL_EMAIL, TELEGRAM_BOT_TOKEN, CHAT_ID } from "../config/config.js";
 import axios from "axios";
+import TelegramBot from "node-telegram-bot-api"
+import fs from "fs"
+
+const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, {polling: true});
+
+
+const loadSubscribers = () => {
+    try {
+        const data = fs.readFileSync("./src/controllers/subscribers.json", "utf8");
+        console.log(data);
+        return JSON.parse(data);
+    } catch (error) {
+        console.error("Error loading subsricbers: ", error);
+        return [];
+    }
+}
+
+const saveSubscribers = (subscribers) => {
+    fs.writeFileSync("./src/controllers/subscribers.json", JSON.stringify(subscribers, null, 2));
+}
+
+bot.onText(/\/start/, (msg) => {
+    const chatId = msg.chat.id;
+    console.log(chatId);
+    let subscribers = loadSubscribers();
+
+    if (!subscribers.includes(chatId)) {
+        subscribers.push(chatId);
+        saveSubscribers(subscribers);
+        bot.sendMessage(chatId, "You have subscribed successfully!");
+    } else {
+        bot.sendMessage(chatId, bot.sendMessage(chatId, "You have already been subscribed!"));
+    }
+})
+
+
+export const getAllSubscribers = () => loadSubscribers();
+
 
 export const sendContactMessage = async (req, res) => {
-    const { name, email, message } = req.body;
+    const { name, email, message} = req.body;
 
     if (!name || !email || !message) {
         return res.status(400).json({ error: "All fields are required." });
@@ -16,11 +54,12 @@ export const sendContactMessage = async (req, res) => {
 
     if (dbError) {
         return res.status(400).json({
-            error: "Error occured while inserting data to the supabase:",
+            error: "Error occurred while inserting data into Supabase:",
             dbError,
         });
     }
 
+    // Prepare the email to notify the team
     const mailOptions = {
         from: email,
         replyTo: email,
@@ -30,28 +69,36 @@ export const sendContactMessage = async (req, res) => {
     };
 
     try {
+        // Send the email
         await transporter.sendMail(mailOptions);
-        processNewContacts();
+        processNewContacts(); // Trigger any additional actions like adding to a contact list
         return res.status(200).json({ message: "Message sent successfully." });
     } catch (error) {
         console.error("Error sending email:", error);
-        return res.status(500).json({ error: "Failed to sent message." });
+        return res.status(500).json({ error: "Failed to send message." });
     }
 };
 
-const sendToTelegram = async (message, req, res) => {
-    const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-    const data = {
-        chat_id: CHAT_ID,
-        text: message,
-    };
 
-    try {
-        await axios.post(url, data);
-        console.log("Messages send to Telegram.");
-    } catch (error) {
-        console.error("Error while sending message to the Telegram: ", error);
+const sendToTelegram = async (message) => {
+
+    const subscribers = getAllSubscribers();
+
+    for (const chatId of subscribers) {
+        const url = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+        const data = {
+            chat_id: chatId,
+            text: message,
+        };
+
+        try {
+            await axios.post(url, data);
+            console.log("Messages send to Telegram.");
+        } catch (error) {
+            console.error("Error while sending message to the Telegram: ", error);
+        }
     }
+    
 };
 
 const getNewContacts = async () => {
@@ -78,7 +125,7 @@ export const processNewContacts = async () => {
 
     contacts.forEach(async (contacts) => {
         const message = `
-            New message:
+            You have recently received a new order. Please check the details.
             Name: ${contacts.name}
             Email: ${contacts.email}
             Message: ${contacts.message}
@@ -87,6 +134,3 @@ export const processNewContacts = async () => {
     });
 };
 
-function toggleMenu() {
-    document.getElementById("nav-links").classList.toggle("active");
-}

@@ -22,7 +22,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            photos.forEach(photo => {
+            const fragment = document.createDocumentFragment();
+
+            photos.reverse().forEach(photo => {
                 const photoItem = document.createElement("div");
                 photoItem.classList.add("photo-item");
 
@@ -33,11 +35,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 const img = document.createElement("img");
                 img.src = photo.url;
                 img.alt = "Photo";
+                img.loading = "lazy"; // ✅ lazy loading
+                img.classList.add("lazy-fade");
 
                 imgLink.appendChild(img);
                 photoItem.appendChild(imgLink);
                 gallery.appendChild(photoItem);
             });
+            gallery.appendChild(fragment); 
 
             refreshFsLightbox();
         } catch (error) {
@@ -48,3 +53,4 @@ document.addEventListener("DOMContentLoaded", function () {
     const pageCategory = document.body.getAttribute("data-category") || "About";
     loadPhotos(pageCategory);
 });
+

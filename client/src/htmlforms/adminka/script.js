@@ -3,6 +3,18 @@ const uploadBtn = document.getElementById('upload-btn');
 const container = document.getElementById('photos-container');
 const fileInput = document.getElementById('fileInput');
 
+fetch('http://localhost:3000/auth/check-token', { credentials: 'include', method: "GET", })
+  .then(res => {
+    if (!res.ok) throw new Error('Not logged in');
+    return res.json();
+  })
+  .then(data => {
+    console.log('Logged in as:', data.email);
+  })
+  .catch(() => {
+    window.location.href = '/client/src/htmlforms/adminka/loginForm.html';
+});
+
 function previewImage(files) {
     if (files.length > 0) {
         Array.from(files).forEach(file => {
@@ -50,6 +62,7 @@ async function uploadPhotos(category) {
         const response = await fetch('http://localhost:3000/photos/uploadPhoto', {
             method: 'POST',
             body: formData,
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -69,6 +82,7 @@ async function fetchPhotos(category) {
             method: 'POST',
             body: JSON.stringify({ category }),
             headers: { 'Content-Type': 'application/json' },
+            credentials: "include",
         });
 
         if (!response.ok) {
@@ -109,7 +123,8 @@ async function deletePhoto(photoUrl, photoItem, category) {
                 url: photoUrl, 
                 category: category,
             }),
-            headers: { 'Content-Type': 'application/json' }
+            headers: { 'Content-Type': 'application/json' },
+            credentials: "include"
         });
 
         console.log(category);

@@ -1,5 +1,8 @@
 {
   "dependencies": {
-    "fslightbox": "^3.5.1"
+    "fslightbox": "^3.5.1",
+    "masonry-layout": "^4.2.2",
+    "nodemon": "^3.1.10",
+    "path": "^0.12.7"
   }
 }

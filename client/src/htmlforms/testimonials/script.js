@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
-            photos.forEach(photo => {
+            photos.reverse().forEach(photo => {
                 const photoItem = document.createElement("div");
                 photoItem.classList.add("photo-item");
 

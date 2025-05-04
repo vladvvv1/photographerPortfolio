@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Contact Form</title>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+  <form id="contactForm">
+    <label for="name">Name *</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+
+    <label for="email">Email *</label><br>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="message">Message *</label><br>
+    <textarea id="message" name="message" rows="5" required></textarea><br><br>
+
+    <!-- Google reCAPTCHA
+    <div class="g-recaptcha" data-sitekey="YOUR_SITE_KEY_HERE"></div><br> -->
+
+    <button type="submit">Send Message</button>
+  </form>
+
+  <p id="result"></p>
+
+  <script>
+    const form = document.getElementById('contactForm');
+    const result = document.getElementById('result');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // const token = grecaptcha.getResponse();
+      // if (!token) {
+      //   result.textContent = 'Please verify that you are not a robot.';
+      //   return;
+      // }
+
+      const formData = {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value,
+        //  
+      };
+
+      try {
+        const res = await fetch('http://localhost:3000/contacts/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          result.textContent = 'Message sent successfully!';
+          form.reset();
+          grecaptcha.reset();
+        } else {
+          result.textContent = data.message || 'Something went wrong!';
+        }
+      } catch (err) {
+        result.textContent = 'Error sending message.';
+        console.error(err);
+      }
+    });
+  </script>
+
+</body>
+</html>

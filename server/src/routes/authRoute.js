@@ -1,45 +1,65 @@
-// import express from "express";
-// import {
-//     loginUser,
-//     logoutUser,
-//     getUser,
-//     refreshToken,
-// } from "../controllers/authController.js";
-// import authMiddleware from "../middlewares/authMiddleware.js";
+import express from "express";
+import { supabase } from "../config/supabaseClient.js";
 
-// const router = express.Router();
+const router = express.Router();
 
-// router.post("/login", async (req, res) => {
-//     try {
-//         const { email, password } = req.body;
+router.post("/login", async (req, res) => {
+    try {
+        const { email, password } = req.body;
 
-//         if (!email || !password) {
-//             console.error("No email or password provided.");
-//             return res
-//                 .status(400)
-//                 .json({ error: "No email or password provided." });
-//         }
+        if (!email || !password) {
+            return res.status(400).json({ error: "No email or password provided." });
+        }
 
-//         const loginAccount = await loginUser(email, password);
+        const { data, error } = await supabase.auth.signInWithPassword({ email, password });
 
-//         res.json(loginAccount);
-//     } catch (error) {
-//         console.error("Login error:", error);
-//         return res.status(500).json({ error: "Internal server error." });
-//     }
-// });
+        if (error) {
+            return res.status(401).json({ error: error.message });
+        }
 
-// router.get("/profile", (req, res) => {
-//     res.json({ user: req.user });
-// });
+        res.cookie("access_token", data.session.access_token, {
+            httpOnly: true,
+            sameSite: "Strict",
+            secure: process.env.NODE_ENV === 'production',
+            maxAge: 60 * 60 * 1000,
+            path: "/"
+        });
 
-// router.get("/getSession", async (req, res) => {
-//     try {
-//         const session = await getSession();
-//         res.json({ session });
-//     } catch (error) {
-//         res.status(500).json({ error: "Failed to get session." });
-//     }
-// });
+        return res.status(200).json({ success: true, user: data.user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
 
-// export default router;
+router.post("/logout", async (req, res) => {
+    try {
+        const token = req.cookies.access_token;
+        if (token) {
+            await supabase.auth.signOut(token);
+        }
+        res.clearCookie("access_token");
+        res.status(200).json({ success: true });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+router.get("/check-token", async (req, res) => {
+    try {
+        const token = req.cookies.access_token;
+        // console.log(token);
+        if (!token) return res.status(401).json({ error: "No token provided." });
+
+        const { data, error } = await supabase.auth.getUser(token);
+        if (error || !data.user) return res.status(401).json({ error: "Invalid token" });
+        
+        res.status(200).json({ message: "Valid token", user: data.user });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+    }
+});
+
+export default router;
