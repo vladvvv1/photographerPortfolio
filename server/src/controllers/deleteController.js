@@ -4,9 +4,8 @@ const deletePhoto = async (req, res) => {
     try {
         const { url, category } = req.body;
 
-        
-        console.log("Url: ", url);
-        console.log("Category: ", category);
+        // console.log("Url: ", url);
+        // console.log("Category: ", category);
 
         if (!url || !category) {
             return res.status(400).json({ error: "No URL or category provided." });
@@ -17,7 +16,7 @@ const deletePhoto = async (req, res) => {
             .select("id")
             .eq("name", category);
 
-        console.log("\nCategory id: ", categoryIdFromTable);
+        // console.log("\nCategory id: ", categoryIdFromTable);
         if (categoryIdFromTableError) {
             console.error(categoryIdFromTableError);
         }
@@ -26,14 +25,14 @@ const deletePhoto = async (req, res) => {
             .from("photos")
             .select("id")
             .eq("url", url)
-        console.log("\nPhotos in photos table: ", photoData);
+        // console.log("\nPhotos in photos table: ", photoData);
 
         if (photoDataError || !photoData || photoData.length === 0) {
             console.log("Error finding photo ID:", photoDataError);
             return res.status(404).json({ error: "Photo not found." });
         }
 
-        console.log("Category id from table.id: ", categoryIdFromTable[0].id);
+        // console.log("Category id from table.id: ", categoryIdFromTable[0].id);
         const {data: categoryPhotos, error: categoryError} = await supabase
             .from("photo_categories")
             .select("photo_id")
@@ -48,7 +47,7 @@ const deletePhoto = async (req, res) => {
         }
 
         const photoIdToDelete = categoryPhotos[0].photo_id;
-        console.log(photoIdToDelete);
+        // console.log(photoIdToDelete);
 
         const { data: photoCategoriesTable, error: photoCategoriesTableError } = await supabase
             .from("photo_categories")
@@ -88,6 +87,7 @@ const deletePhoto = async (req, res) => {
                 }
         }
 
+        console.log("Picture was successfully deleted.");
         return res.json({
             success: true,
             message: "Photo deleted successfully from the category.",

@@ -4,8 +4,8 @@ const getPhoto = async (req, res) => {
     try {
         let { category } = req.body;
 
-        console.log("req.body: ", req.body)
-        console.log("category: ", category);
+        // console.log("req.body: ", req.body)
+        // console.log("category: ", category);
 
         if (!Array.isArray(category)) {
             category = [category];
@@ -15,6 +15,8 @@ const getPhoto = async (req, res) => {
             .from("categories")
             .select("id")
             .in("name", category);
+
+        // console.log("category data: ", categoryData)
 
         if (categoryError) {
             console.log(categoryError);
@@ -28,7 +30,7 @@ const getPhoto = async (req, res) => {
             return res.status(404).json({ error: "No matching categories found." });
         }
 
-        console.log("category_id: ", category_id);
+        // console.log("category_id: ", category_id);
 
         const { data: photoId, error: relationError } = await supabase
             .from("photo_categories")
@@ -37,10 +39,10 @@ const getPhoto = async (req, res) => {
 
         if (relationError) throw relationError;
 
-        console.log("photoId: ", photoId);
+        // console.log("photoId: ", photoId);
 
         const photoIdList = photoId.map((p) => p.photo_id);
-        console.log("photoIdList: ", photoIdList);
+        // console.log("photoIdList: ", photoIdList);
 
         const { data: photos, error: photosError } = await supabase
             .from("photos")
@@ -49,6 +51,9 @@ const getPhoto = async (req, res) => {
 
         if (photosError) throw photosError;
 
+        // console.log("error photos: ", photosError);
+
+        console.log("Fetched pictures: ", photos);
         res.json(photos);
     } catch (err) {
         res.status(500).json({ error: err.message });

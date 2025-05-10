@@ -117,7 +117,7 @@ const getNewContacts = async () => {
 
 export const processNewContacts = async () => {
     const contacts = await getNewContacts();
-
+    console.log(contacts);
     if (!contacts || contacts.length === 0) {
         console.log("There's no new contacts");
         return;

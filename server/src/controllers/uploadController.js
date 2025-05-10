@@ -3,7 +3,7 @@ import { supabase } from "../config/supabaseClient.js";
 const uploadPhoto = async (req, res) => {
     try {
         let { categories } = req.body;
-        const files = req.files; // Use `req.files` as an array
+        const files = req.files;
 
         if (!categories || !files || files.length === 0) {
             return res.status(400).json({ error: "No files or categories provided" });
@@ -35,6 +35,8 @@ const uploadPhoto = async (req, res) => {
                     upsert: true,
                 });
 
+            console.log("Storage data: ", storageData);
+            
             if (storageError) throw storageError;
 
             const { data: publicUrlNo, error: publicUrlError } = supabase.storage
@@ -83,8 +85,8 @@ const uploadPhoto = async (req, res) => {
             .insert(photoCategoryEntries);
 
         if (relationError) throw relationError;
-
-        res.json({ success: true, uploadedPhotos });
+        console.log("Pictures was successfully uploaded");
+        res.json({ success: true, uploadedPhotos, message: "Pictures was successfully uploaded." });
     } catch (err) {
         // console.log(err);
         res.status(500).json({ error: err.message });
