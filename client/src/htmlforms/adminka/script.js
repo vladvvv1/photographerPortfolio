@@ -1,3 +1,4 @@
+
 const categorySelect = document.getElementById('category-select');
 const uploadBtn = document.getElementById('upload-btn');
 const container = document.getElementById('photos-container');
@@ -9,10 +10,10 @@ fetch('http://localhost:3000/auth/check-token', { credentials: 'include', method
     return res.json();
   })
   .then(data => {
-    console.log('Logged in as:', data.email);
+    console.log('Logged in as:', data);
   })
   .catch(() => {
-    window.location.href = '/client/src/htmlforms/adminka/loginForm.html';
+    window.location.href = '/login';
 });
 
 function previewImage(files) {
@@ -46,7 +47,8 @@ function previewImage(files) {
 
 async function uploadPhotos(category) {
     const files = fileInput.files;
-
+    console.log(files);
+    
     if (files.length === 0) {
         alert('Будь ласка, виберіть фото для завантаження.');
         return;
@@ -57,15 +59,19 @@ async function uploadPhotos(category) {
         formData.append('photos', file);
     }
     formData.append('categories', JSON.stringify(category));
-
+    
     try {
         const response = await fetch('http://localhost:3000/photos/uploadPhoto', {
             method: 'POST',
             body: formData,
-            credentials: "include",
-        });
+            headers: {
+                // 'Content-Type': 'multipart/form-data'  // No need to set 'application/json' here
+            },
+            credentials: "include"
+        }); 
 
         if (!response.ok) {
+            console.log(response);
             throw new Error('Помилка при завантаженні фото');
         }
 

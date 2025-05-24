@@ -1,11 +1,9 @@
-import { supabase } from "../config/supabaseClient.js";
+import { createSupabaseWithoutToken } from "../config/supabaseClient.js";
 
 const getPhoto = async (req, res) => {
     try {
         let { category } = req.body;
-
-        // console.log("req.body: ", req.body)
-        // console.log("category: ", category);
+        const supabase = createSupabaseWithoutToken;
 
         if (!Array.isArray(category)) {
             category = [category];
@@ -16,8 +14,6 @@ const getPhoto = async (req, res) => {
             .select("id")
             .in("name", category);
 
-        // console.log("category data: ", categoryData)
-
         if (categoryError) {
             console.log(categoryError);
             return res.status(404).json({ error: "Category not found." });
@@ -25,12 +21,9 @@ const getPhoto = async (req, res) => {
 
         const category_id = categoryData.map(item => item.id);
 
-        
         if (category_id.length === 0) {
             return res.status(404).json({ error: "No matching categories found." });
         }
-
-        // console.log("category_id: ", category_id);
 
         const { data: photoId, error: relationError } = await supabase
             .from("photo_categories")
@@ -39,19 +32,14 @@ const getPhoto = async (req, res) => {
 
         if (relationError) throw relationError;
 
-        // console.log("photoId: ", photoId);
-
         const photoIdList = photoId.map((p) => p.photo_id);
-        // console.log("photoIdList: ", photoIdList);
-
+      
         const { data: photos, error: photosError } = await supabase
             .from("photos")
             .select("*")
             .in("id", photoIdList);
 
         if (photosError) throw photosError;
-
-        // console.log("error photos: ", photosError);
 
         console.log("Fetched pictures: ", photos);
         res.json(photos);

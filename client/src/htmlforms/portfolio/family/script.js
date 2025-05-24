@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     async function loadPhotos(category) {
         try {
+            console.log("Category: ", category);
             const response = await fetch("http://localhost:3000/photos/getPhotos", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },

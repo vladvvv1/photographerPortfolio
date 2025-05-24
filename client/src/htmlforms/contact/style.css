@@ -187,6 +187,15 @@ body { color: white; margin: 0; padding: 0; width: 100%; }
 
 #contactForm button:active { transform: scale(0.97); background-color: #4e5c5e; }
 
+#contactForm input:-webkit-autofill,
+#contactForm textarea:-webkit-autofill {
+    background-color: transparent !important;
+    -webkit-box-shadow: 0 0 0 1000px #D9DCCD inset !important;
+    -webkit-text-fill-color: #000 !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+
 @media (max-width: 1025px) {
     #contactForm { padding-top: 60px; max-width: 700px; }
 

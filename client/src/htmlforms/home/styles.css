@@ -32,17 +32,12 @@ body {
     background: transparent;
 }
 
-/* .container {
-    background: url("../../photos/IMG_1753-7e7d697b-1500.png") no-repeat center center/cover;
-    height: 100vh;
-}  */
 
 .container {
     background: url("../../photos/IMG_1753-7e7d697b-1500.png") no-repeat center center/cover;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: center;  */
 }
 
 .center-body {
@@ -53,6 +48,7 @@ body {
     border-bottom: 2px solid white;
     padding-bottom: 50px;
     flex-wrap: wrap;
+    min-height: calc(100vh - 230px);
 }
 
 
@@ -71,9 +67,10 @@ body {
 
 .text-wrapper-right-text {
     font-family: "Courier Prime", monospace;
-    font-size: 17px;
+    font-size: 18px;
     word-spacing: 3px;
     box-sizing: border-box; 
+    margin-top: auto;
 }
 
 .chicago-text {
@@ -210,9 +207,6 @@ body {
         font-size: 22px;
     }
 
-    .nav-links a {
-        font-size: 13px;
-    }
 
     .center-body {
         padding-top: 5px !important;
@@ -229,14 +223,15 @@ body {
 
     .text-wrapper-right-text {
         align-self: right !important;
-        width: 250px;
-        max-width: 250px;
+        width: 310px;
+        font-size: 18px;
+        max-width: 310px;
+        margin-top: auto;
     }
 
     .rigth-small-text {
         align-self: right !important;
-        width: 250px !important;
-        
+        width: 290px !important;
     }
 
     .content-left2 {
@@ -263,14 +258,16 @@ body {
     }
 }
 
-@media (max-width: 886px) {
+@media (max-width: 932px) {
     .content-left p {
         font-size: 50px;
     }
 
     .text-wrapper-right-text {
-        max-width: 200px;
-        width: 200px;
+        max-width: 300px;
+        width: 300px;
+        margin-right: 50px;
+        margin-top: auto;
     }
 
     .content-left p {
@@ -283,16 +280,31 @@ body {
     }
 
     .rigth-small-text {
-        max-width: 200px !important;
+        max-width: 300px !important;
     }
 }
 
+@media (max-width: 920px) {
+    .nav-links li {
+        font-weight: 400; /* here problem */
+        line-height: 40px;
+        font-family: "Courier Prime", monospace;
+    } 
+   
+}
+
 @media (max-width: 770px) {
+    .text-wrapper-right-text {
+        max-width: 280px;
+        width: 280px;
+        font-size: 15px;
+        margin-right: 50px;
+        margin-top: auto;
+    }
+
     .container2 {
         flex-direction: column;
     }
-
-    
 
     .box-text-button {
         order: 1;
@@ -305,7 +317,6 @@ body {
         order: 3;
     }
 
-    
     .more-about-button {
         order: 4;
         align-self: center; /* центрує кнопку */
@@ -328,10 +339,26 @@ body {
         padding: 30px 0;
         max-width: 180px;
     }
+
+    .content-left p {
+        max-width: none;
+        font-size: 40px;
+    }
     .text-wrapper2 {
         margin: 0 auto;
         max-width: 100%;
     }
+.rigth-small-text {
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+
+    .rigth-small-text p {
+        max-width: 100% !important;
+        width: 100% !important;
+        font-size: 14px;
+    }
+    
     .rigth-text2 {
         margin: 0 auto !important;
         max-width: 100%;
@@ -370,7 +397,6 @@ body {
         margin-top: 34px !important;
     }
 
-  
     .content-left p {
         max-width: none;
         font-size: 40px;
@@ -379,6 +405,7 @@ body {
     .text-wrapper-right-text {
         max-width: none !important; 
         margin-top: 180px;
+        font-size: 16px !important;
     }
 
     .content-wrapper2 {
@@ -414,11 +441,22 @@ body {
 @media (max-width: 426px) {
 
     .page-with-welcome-text {
-        margin-bottom: 50px;    
+        margin-bottom: 50px;  
+
+    }
+
+    .text-wrapper-right-text{ 
+        /* margin-top: auto; */
     }
 
     .container2 {
         padding: 0 20px ; 
+    }
+}
+
+@media (max-width: 391px) {
+    .text-wrapper-right-text {
+        /* margin-top: 270px; */
     }
 }
 
@@ -436,4 +474,33 @@ body {
         font-size: 40px;
         line-height: 34px;
     }
+}
+
+ 
+
+
+
+.burger-menu::before, .burger-menu::after {
+    content: '';
+    position: absolute;
+    height: 2px;
+    widtH: 100%;
+    background-color: #ffffff;
+    transition: all 0.3s ease 0s;
+}
+
+
+
+.burger-menu.active span { 
+    transform: scale(0);
+    background-color: black;
+}
+.burger-menu.active::before {
+    top: 50%;
+    transform: rotate(-45deg) translate(0, -50%);background-color: black;
+}
+.burger-menu.active::after {
+    bottom: 50%;
+    transform: rotate(45deg) translate(0, 50%);
+    background-color: black;
 }

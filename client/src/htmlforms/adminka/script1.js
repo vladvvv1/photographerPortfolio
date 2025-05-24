@@ -25,8 +25,9 @@ form.addEventListener("submit", async (e) => {
                 credentials: "include"
             });
             
+            
             if (authCheck.ok) {
-                window.location.href = "/client/src/htmlforms/adminka/adminka.html";
+                window.location.href = "/adminka";
             } else {
                 errorMsg.textContent = "Помилка авторизації";
             }

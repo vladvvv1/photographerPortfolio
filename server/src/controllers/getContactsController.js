@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.js";
+import { createSupabaseWithoutToken } from "../config/supabaseClient.js";
 import { transporter } from "../config/nodemailer.js";
 import {COULDFARE_SECRET_KEY, GMAIL_EMAIL, TELEGRAM_BOT_TOKEN, CHAT_ID } from "../config/config.js";
 import axios from "axios";
@@ -7,11 +7,10 @@ import fs from "fs"
 
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, {polling: true});
 
-
 const loadSubscribers = () => {
     try {
         const data = fs.readFileSync("./src/controllers/subscribers.json", "utf8");
-        console.log(data);
+        // console.log(data);
         return JSON.parse(data);
     } catch (error) {
         console.error("Error loading subsricbers: ", error);
@@ -42,6 +41,9 @@ export const getAllSubscribers = () => loadSubscribers();
 
 
 export const sendContactMessage = async (req, res) => {
+    
+    const supabase = createSupabaseWithoutToken;
+    
     const { name, email, message} = req.body;
 
     if (!name || !email || !message) {
@@ -102,6 +104,8 @@ const sendToTelegram = async (message) => {
 };
 
 const getNewContacts = async () => {
+    const supabase = createSupabaseWithoutToken;
+    
     const { data, error } = await supabase
         .from("contact_messages")
         .select("*")

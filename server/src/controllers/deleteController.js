@@ -1,4 +1,4 @@
-import { supabase } from "../config/supabaseClient.js";
+import { createSupabaseWithToken } from "../config/supabaseClient.js";
 
 const deletePhoto = async (req, res) => {
     try {
@@ -6,6 +6,9 @@ const deletePhoto = async (req, res) => {
 
         // console.log("Url: ", url);
         // console.log("Category: ", category);
+
+        const accessToken = req.cookies.access_token;
+        const supabase = createSupabaseWithToken(accessToken);
 
         if (!url || !category) {
             return res.status(400).json({ error: "No URL or category provided." });
