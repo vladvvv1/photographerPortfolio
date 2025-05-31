@@ -2,6 +2,7 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const gallery = document.getElementById("photo-displaying-page");
+    const scrollToTopBtn = document.getElementById("scrollToTopBtn");
 
     async function loadPhotos(category) {
         try {
@@ -23,6 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 return;
             }
 
+            const fragment = document.createDocumentFragment();
+
             photos.reverse().forEach(photo => {
                 const photoItem = document.createElement("div");
                 photoItem.classList.add("photo-item");
@@ -34,13 +37,15 @@ document.addEventListener("DOMContentLoaded", function () {
                 const img = document.createElement("img");
                 img.src = photo.url;
                 img.alt = "Photo";
-
+                img.loading = "lazy"; // ✅ lazy loading
+                img.classList.add("lazy-fade");
+                
                 imgLink.appendChild(img);
                 photoItem.appendChild(imgLink);
                 gallery.appendChild(photoItem);
             });
+            gallery.appendChild(fragment); // все додається за
 
-            // Initialize FS Lightbox
             refreshFsLightbox();
         } catch (error) {
             console.error("Error loading photos:", error);

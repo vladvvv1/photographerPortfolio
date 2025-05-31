@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 photoItem.appendChild(imgLink);
                 gallery.appendChild(photoItem);
             });
-            gallery.appendChild(fragment); // все додається за
+            gallery.appendChild(fragment);
 
             refreshFsLightbox();
         } catch (error) {

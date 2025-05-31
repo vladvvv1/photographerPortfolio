@@ -27,6 +27,7 @@ form.addEventListener("submit", async (e) => {
             
             
             if (authCheck.ok) {
+                console.log(authCheck);
                 window.location.href = "/adminka";
             } else {
                 errorMsg.textContent = "Помилка авторизації";

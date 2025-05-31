@@ -14,7 +14,7 @@ app.use(express.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true , limit: '50mb'}));
 app.use(cookieParser());
 app.use(cors({
-    origin: "http://localhost:5500",
+    origin:["http://localhost:5500", "http://localhost:3000"],
     credentials: true,
 }));
 
@@ -22,6 +22,7 @@ const __dirname = path.resolve();
 
 app.use(express.static(path.join(__dirname, "../client/src/")));
 app.use(express.static(path.join(__dirname, '../client/src/htmlforms/')));
+app.use(express.static(path.join(__dirname, "../client/src/htmlforms/adminka")))
 app.use(express.static(path.join(__dirname, '../client/src/htmlforms/home')));
 app.use(express.static(path.join(__dirname, "../client/src/htmlforms/about")));
 app.use(express.static(path.join(__dirname, "../client/src/htmlforms/testimonials")));
@@ -62,7 +63,7 @@ app.get("/adminka", (req, res) => {
     res.sendFile(path.join(__dirname, "../client/src/htmlforms/adminka/adminka.html"))
 })
 
-app.get("/login", (req, res) => {
+app.get("/login", (req, res) => {   
     res.sendFile(path.join(__dirname, "../client/src/htmlforms/adminka/loginForm.html"))
 })
 
